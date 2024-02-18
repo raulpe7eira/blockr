@@ -1,0 +1,6 @@
+%{
+  "canvas": {:git, "https://github.com/groxio-learning/canvas.git", "a0def305ab50bc431daae17ab873a566224d3284", [tag: "v0.1"]},
+  "fss": {:hex, :fss, "0.1.1", "9db2344dbbb5d555ce442ac7c2f82dd975b605b50d169314a20f08ed21e08642", [:mix], [], "hexpm", "78ad5955c7919c3764065b21144913df7515d52e228c09427a004afe9c1a16b0"},
+  "kino": {:hex, :kino, "0.11.3", "c48a3f8bcad5ec103884aee119dc01594c0ead7c755061853147357c01885f2c", [:mix], [{:fss, "~> 0.1.0", [hex: :fss, repo: "hexpm", optional: false]}, {:nx, "~> 0.1", [hex: :nx, repo: "hexpm", optional: true]}, {:table, "~> 0.1.2", [hex: :table, repo: "hexpm", optional: false]}], "hexpm", "027e1f634ce175e9092d9bfc632c911ca50ad735eecc77770bfaf4b4a8b2932f"},
+  "table": {:hex, :table, "0.1.2", "87ad1125f5b70c5dea0307aa633194083eb5182ec537efc94e96af08937e14a8", [:mix], [], "hexpm", "7e99bc7efef806315c7e65640724bf165c3061cdc5d854060f74468367065029"},
+}
