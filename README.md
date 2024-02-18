@@ -1,6 +1,6 @@
 # Blockr
 
-This code corresponds to the [Elixir Course by Grox.io](https://grox.io/about-product/elixir) lab.
+This code corresponds to the [Elixir Course by Grox.io](https://grox.io/about-product/elixir) lab by [Bruce Tate](https://twitter.com/redrapids).
 
 > The project simulates a Tetris game.
 
