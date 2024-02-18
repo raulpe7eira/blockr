@@ -16,6 +16,8 @@ Canvas.new(point)
 
 ## Multiple points
 
+### I shape
+
 ```elixir
 points =
   [
@@ -28,6 +30,8 @@ points =
 Canvas.new(points)
 ```
 
+#### L shape
+
 ```elixir
 points =
   [
@@ -39,6 +43,8 @@ points =
 
 Canvas.new(points)
 ```
+
+### Square shape
 
 ```elixir
 points =
@@ -52,6 +58,8 @@ points =
 Canvas.new(points)
 ```
 
+### Z shape
+
 ```elixir
 points =
   [
@@ -62,4 +70,112 @@ points =
   ]
 
 Canvas.new(points)
+```
+
+### Move w/ one function call
+
+```elixir
+points =
+  [
+    Point.new(2, 5),
+    Point.new(2, 6),
+    Point.new(3, 4),
+    Point.new(3, 5)
+  ]
+
+points
+|> Enum.map(&Point.move_right/1)
+|> Enum.map(&Point.move_right/1)
+|> Enum.map(&Point.move_left/1)
+|> Enum.map(&Point.move_down/1)
+|> Enum.map(&Point.move_down/1)
+|> Enum.map(&Point.move_down/1)
+|> Enum.map(&Point.move_left/1)
+|> Canvas.new()
+```
+
+## Big tetromino
+
+```elixir
+points =
+  [
+    Point.new(2, 2),
+    Point.new(3, 2),
+    Point.new(4, 2),
+    Point.new(4, 3)
+  ]
+
+Canvas.tetromino(points)
+```
+
+```elixir
+defmodule Spinner do
+  def swap({row, col}), do: {col, row}
+
+  def flip_left_right({row, col}), do: {row, 5 - col}
+
+  def flip_top_bottom({row, col}), do: {5 - row, col}
+
+  def rotate(point, 0), do: point
+
+  def rotate(point, 90) do
+    point
+    |> swap()
+    |> flip_left_right()
+  end
+
+  def rotate(point, 180) do
+    point
+    |> flip_top_bottom()
+    |> flip_left_right()
+  end
+
+  def rotate(point, 270) do
+    point
+    |> swap()
+    |> flip_top_bottom()
+  end
+end
+```
+
+```elixir
+points
+|> Enum.map(&Spinner.swap/1)
+|> Canvas.tetromino()
+```
+
+```elixir
+points
+|> Enum.map(&Spinner.flip_left_right/1)
+|> Canvas.tetromino()
+```
+
+```elixir
+points
+|> Enum.map(&Spinner.flip_top_bottom/1)
+|> Canvas.tetromino()
+```
+
+```elixir
+points
+|> Enum.map(&Spinner.rotate(&1, 0))
+|> Canvas.tetromino()
+```
+
+```elixir
+points
+|> Enum.map(&Spinner.rotate(&1, 90))
+|> Canvas.tetromino()
+```
+
+```elixir
+points
+|> Enum.map(&Spinner.rotate(&1, 180))
+|> Canvas.tetromino()
+```
+
+```elixir
+points
+|> Enum.map(&Spinner.rotate(&1, 270))
+|> Canvas.tetromino()
 ```
