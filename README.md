@@ -1,6 +1,8 @@
 # Blockr
 
-**TODO: Add description**
+This code corresponds to the [Elixir Course by Grox.io](https://grox.io/about-product/elixir) lab.
+
+> The project simulates a Tetris game.
 
 ## Installation
 
