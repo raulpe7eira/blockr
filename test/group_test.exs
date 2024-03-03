@@ -25,9 +25,7 @@ defmodule GroupTest do
 
   describe "move_to/2" do
     test "when given a valid points and location, move points to location", ctx do
-      location = {3, 4}
-
-      assert Group.move_to(ctx.points, location) == [{5, 6}, {6, 6}, {7, 6}, {7, 7}]
+      assert Group.move_to(ctx.points, {3, 4}) == [{5, 6}, {6, 6}, {7, 6}, {7, 7}]
     end
   end
 

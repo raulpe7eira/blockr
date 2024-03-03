@@ -31,8 +31,7 @@ defmodule PointTest do
 
   describe "move_to/2" do
     test "when given a valid point and location, move point to location", ctx do
-      location = {3, 4}
-      assert Point.move_to(ctx.point, location) == {4, 6}
+      assert Point.move_to(ctx.point, {3, 4}) == {4, 6}
     end
   end
 
