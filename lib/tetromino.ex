@@ -1,32 +1,5 @@
 defmodule Tetromino do
-  @doc """
-  t: ***
-      *
-
-  l: *
-     *
-     **
-
-  j:  *
-      *
-     **
-
-  i: *
-     *
-     *
-     *
-
-  o: **
-     **
-
-  s:  **
-     **
-
-  z: **
-      **
-  """
-
-  defstruct name: :i, location: {1, 1}, rotation: 0, color: :green
+  defstruct name: :i, location: {0, 0}, rotation: 0, color: :green
 
   def new(name \\ :i) do
     %__MODULE__{name: name}

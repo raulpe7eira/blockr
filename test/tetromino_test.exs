@@ -11,7 +11,7 @@ defmodule TetrominoTest do
     test "when call new, create a new tetromino" do
       assert Tetromino.new() == %Tetromino{
                name: :i,
-               location: {1, 1},
+               location: {0, 0},
                rotation: 0,
                color: :green
              }
@@ -22,7 +22,7 @@ defmodule TetrominoTest do
     test "when given a valid name, create a new tetromino" do
       assert Tetromino.new(:z) == %Tetromino{
                name: :z,
-               location: {1, 1},
+               location: {0, 0},
                rotation: 0,
                color: :green
              }
