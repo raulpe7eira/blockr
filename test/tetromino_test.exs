@@ -99,43 +99,51 @@ defmodule TetrominoTest do
 
   describe "to_group/1" do
     test "when given a valid :i tetro, covert to group", ctx do
-      assert Tetromino.to_group(ctx.tetro) == [{1, 2}, {2, 2}, {3, 2}, {4, 2}]
+      assert Tetromino.to_group(ctx.tetro) == [{2, 3}, {3, 3}, {4, 3}, {5, 3}]
     end
 
     @tag tetro_name: :l
     test "when given a valid :l tetro, covert to group", ctx do
-      assert Tetromino.to_group(ctx.tetro) == [{1, 2}, {2, 2}, {3, 2}, {3, 3}]
+      assert Tetromino.to_group(ctx.tetro) == [{2, 3}, {3, 3}, {4, 3}, {4, 4}]
     end
 
     @tag tetro_name: :j
     test "when given a valid :j tetro, covert to group", ctx do
-      assert Tetromino.to_group(ctx.tetro) == [{1, 3}, {2, 3}, {3, 2}, {3, 3}]
+      assert Tetromino.to_group(ctx.tetro) == [{2, 4}, {3, 4}, {4, 3}, {4, 4}]
     end
 
     @tag tetro_name: :o
     test "when given a valid :o tetro, covert to group", ctx do
-      assert Tetromino.to_group(ctx.tetro) == [{1, 2}, {1, 3}, {2, 2}, {2, 3}]
+      assert Tetromino.to_group(ctx.tetro) == [{2, 3}, {2, 4}, {3, 3}, {3, 4}]
     end
 
     @tag tetro_name: :s
     test "when given a valid :s tetro, covert to group", ctx do
-      assert Tetromino.to_group(ctx.tetro) == [{2, 3}, {2, 4}, {3, 2}, {3, 3}]
+      assert Tetromino.to_group(ctx.tetro) == [{3, 4}, {3, 5}, {4, 3}, {4, 4}]
     end
 
     @tag tetro_name: :t
     test "when given a valid :t tetro, covert to group", ctx do
-      assert Tetromino.to_group(ctx.tetro) == [{1, 2}, {2, 2}, {3, 2}, {2, 3}]
+      assert Tetromino.to_group(ctx.tetro) == [{2, 3}, {3, 3}, {4, 3}, {3, 4}]
     end
 
     @tag tetro_name: :z
     test "when given a valid :z tetro, covert to group", ctx do
-      assert Tetromino.to_group(ctx.tetro) == [{2, 2}, {2, 3}, {3, 3}, {3, 4}]
+      assert Tetromino.to_group(ctx.tetro) == [{3, 3}, {3, 4}, {4, 4}, {4, 5}]
     end
 
     test "when given a valid tetro rotated, covert to group", ctx do
       assert ctx.tetro
              |> Tetromino.rotate()
-             |> Tetromino.to_group() == [{2, 4}, {2, 3}, {2, 2}, {2, 1}]
+             |> Tetromino.to_group() == [{3, 5}, {3, 4}, {3, 3}, {3, 2}]
+    end
+
+    test "when given a valid tetro moved, covert to group", ctx do
+      assert ctx.tetro
+             |> Tetromino.fall()
+             |> Tetromino.left()
+             |> Tetromino.right()
+             |> Tetromino.to_group() == [{3, 3}, {4, 3}, {5, 3}, {6, 3}]
     end
   end
 end

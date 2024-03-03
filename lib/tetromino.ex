@@ -60,5 +60,6 @@ defmodule Tetromino do
       :z -> [{2, 2}, {2, 3}, {3, 3}, {3, 4}]
     end
     |> Group.rotate(tetro.rotation)
+    |> Group.move_to(tetro.location)
   end
 end

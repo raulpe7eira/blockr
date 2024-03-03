@@ -7,6 +7,8 @@ defmodule Point do
 
   def move_right({row, col}), do: {row, col + 1}
 
+  def move_to({from_row, from_col}, {to_row, to_col}), do: {from_row + to_row, from_col + to_col}
+
   def rotate(point, 0), do: point
 
   def rotate(point, 90) do
