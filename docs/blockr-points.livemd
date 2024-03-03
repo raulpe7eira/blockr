@@ -30,6 +30,20 @@ points =
 Canvas.new(points)
 ```
 
+#### J shape
+
+```elixir
+points =
+  [
+    Point.new(1, 5),
+    Point.new(2, 5),
+    Point.new(3, 5),
+    Point.new(3, 4)
+  ]
+
+Canvas.new(points)
+```
+
 #### L shape
 
 ```elixir
@@ -44,7 +58,7 @@ points =
 Canvas.new(points)
 ```
 
-### Square shape
+### O shape
 
 ```elixir
 points =
@@ -58,7 +72,7 @@ points =
 Canvas.new(points)
 ```
 
-### Z shape
+### S shape
 
 ```elixir
 points =
@@ -67,6 +81,20 @@ points =
     Point.new(2, 6),
     Point.new(3, 4),
     Point.new(3, 5)
+  ]
+
+Canvas.new(points)
+```
+
+### Z shape
+
+```elixir
+points =
+  [
+    Point.new(2, 4),
+    Point.new(2, 5),
+    Point.new(3, 5),
+    Point.new(3, 6)
   ]
 
 Canvas.new(points)
@@ -177,5 +205,70 @@ points
 ```elixir
 points
 |> Enum.map(&Spinner.rotate(&1, 270))
+|> Canvas.tetromino()
+```
+
+## Shapes
+
+### :i shape
+
+```elixir
+:i
+|> Tetromino.new()
+|> Tetromino.to_group()
+|> Canvas.tetromino()
+```
+
+### :l shape
+
+```elixir
+:l
+|> Tetromino.new()
+|> Tetromino.to_group()
+|> Canvas.tetromino()
+```
+
+### :j shape
+
+```elixir
+:j
+|> Tetromino.new()
+|> Tetromino.to_group()
+|> Canvas.tetromino()
+```
+
+### :o shape
+
+```elixir
+:o
+|> Tetromino.new()
+|> Tetromino.to_group()
+|> Canvas.tetromino()
+```
+
+### :s shape
+
+```elixir
+:s
+|> Tetromino.new()
+|> Tetromino.to_group()
+|> Canvas.tetromino()
+```
+
+### :t shape
+
+```elixir
+:t
+|> Tetromino.new()
+|> Tetromino.to_group()
+|> Canvas.tetromino()
+```
+
+### :z shape
+
+```elixir
+:z
+|> Tetromino.new()
+|> Tetromino.to_group()
 |> Canvas.tetromino()
 ```
