@@ -1,5 +1,11 @@
 # Blockr
 
+```elixir
+alias Blockr.Game.Canvas
+alias Blockr.Game.Point
+alias Blockr.Game.Tetromino
+```
+
 ## One point
 
 ```elixir
@@ -272,3 +278,18 @@ points
 |> Tetromino.to_group()
 |> Canvas.tetromino()
 ```
+
+## Complete through - part 1
+
+Next in our implementation:
+
+* Add a game `Board`
+  -- Add walls to our `Board`
+* Enhance `Canvas` dimensions to show walls
+* Enhance `Canvas` to show background color
+* Add score to our `Board`
+* Add `Game.left`, `Game.right` and check overloaps when tetromino moves
+* Add `Game.fall` and check overlaps when tetromino moves
+* Detatch `Tetromino` if `fall` fails
+* Score `Tetromino` if `fall` fails
+* Remove scored rows on `score`

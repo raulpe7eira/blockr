@@ -1,5 +1,7 @@
-defmodule PointTest do
+defmodule Blockr.Game.PointTest do
   use ExUnit.Case
+
+  alias Blockr.Game.Point
 
   setup do
     %{point: {1, 2}}
@@ -50,6 +52,12 @@ defmodule PointTest do
 
     test "when given a valid point and 270 degrees, rotate the point", ctx do
       assert Point.rotate(ctx.point, 270) == {3, 1}
+    end
+  end
+
+  describe "paint/2" do
+    test "when given a valid point and color, return the point w/ color", ctx do
+      assert Point.paint(ctx.point, "purple") == {{1, 2}, "purple"}
     end
   end
 end

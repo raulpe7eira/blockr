@@ -1,4 +1,4 @@
-defmodule Point do
+defmodule Blockr.Game.Point do
   def new(row, col), do: {row, col}
 
   def move_down({row, col}), do: {row + 1, col}
@@ -27,6 +27,10 @@ defmodule Point do
     point
     |> swap()
     |> flip_top_bottom()
+  end
+
+  def paint(point, color) do
+    {point, color}
   end
 
   defp swap({row, col}), do: {col, row}

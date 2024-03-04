@@ -1,10 +1,12 @@
-defmodule TetrominoTest do
+defmodule Blockr.Game.TetrominoTest do
   use ExUnit.Case
+
+  alias Blockr.Game.Tetromino
 
   setup(ctx) do
     name = Map.get(ctx, :tetro_name, :i)
 
-    %{tetro: %Tetromino{name: name, location: {1, 1}, rotation: 0, color: :green}}
+    %{tetro: %Tetromino{name: name, location: {1, 1}, rotation: 0, color: "blue"}}
   end
 
   describe "new/0" do
@@ -13,7 +15,7 @@ defmodule TetrominoTest do
                name: :i,
                location: {0, 0},
                rotation: 0,
-               color: :green
+               color: "blue"
              }
     end
   end
@@ -24,7 +26,7 @@ defmodule TetrominoTest do
                name: :z,
                location: {0, 0},
                rotation: 0,
-               color: :green
+               color: "red"
              }
     end
   end
@@ -35,7 +37,7 @@ defmodule TetrominoTest do
                name: :i,
                location: {2, 1},
                rotation: 0,
-               color: :green
+               color: "blue"
              }
     end
   end
@@ -46,7 +48,7 @@ defmodule TetrominoTest do
                name: :i,
                location: {1, 0},
                rotation: 0,
-               color: :green
+               color: "blue"
              }
     end
   end
@@ -57,7 +59,7 @@ defmodule TetrominoTest do
                name: :i,
                location: {1, 2},
                rotation: 0,
-               color: :green
+               color: "blue"
              }
     end
   end
@@ -68,7 +70,7 @@ defmodule TetrominoTest do
                name: :i,
                location: {1, 1},
                rotation: 90,
-               color: :green
+               color: "blue"
              }
 
       assert Enum.reduce(1..2, ctx.tetro, fn _, tetro -> Tetromino.rotate(tetro) end) ==
@@ -76,7 +78,7 @@ defmodule TetrominoTest do
                  name: :i,
                  location: {1, 1},
                  rotation: 180,
-                 color: :green
+                 color: "blue"
                }
 
       assert Enum.reduce(1..3, ctx.tetro, fn _, tetro -> Tetromino.rotate(tetro) end) ==
@@ -84,7 +86,7 @@ defmodule TetrominoTest do
                  name: :i,
                  location: {1, 1},
                  rotation: 270,
-                 color: :green
+                 color: "blue"
                }
 
       assert Enum.reduce(1..4, ctx.tetro, fn _, tetro -> Tetromino.rotate(tetro) end) ==
@@ -92,50 +94,90 @@ defmodule TetrominoTest do
                  name: :i,
                  location: {1, 1},
                  rotation: 0,
-                 color: :green
+                 color: "blue"
                }
     end
   end
 
   describe "to_group/1" do
     test "when given a valid :i tetro, covert to group", ctx do
-      assert Tetromino.to_group(ctx.tetro) == [{2, 3}, {3, 3}, {4, 3}, {5, 3}]
+      assert Tetromino.to_group(ctx.tetro) == [
+               {{2, 3}, "blue"},
+               {{3, 3}, "blue"},
+               {{4, 3}, "blue"},
+               {{5, 3}, "blue"}
+             ]
     end
 
     @tag tetro_name: :l
     test "when given a valid :l tetro, covert to group", ctx do
-      assert Tetromino.to_group(ctx.tetro) == [{2, 3}, {3, 3}, {4, 3}, {4, 4}]
+      assert Tetromino.to_group(ctx.tetro) == [
+               {{2, 3}, "brown"},
+               {{3, 3}, "brown"},
+               {{4, 3}, "brown"},
+               {{4, 4}, "brown"}
+             ]
     end
 
     @tag tetro_name: :j
     test "when given a valid :j tetro, covert to group", ctx do
-      assert Tetromino.to_group(ctx.tetro) == [{2, 4}, {3, 4}, {4, 3}, {4, 4}]
+      assert Tetromino.to_group(ctx.tetro) == [
+               {{2, 4}, "orange"},
+               {{3, 4}, "orange"},
+               {{4, 3}, "orange"},
+               {{4, 4}, "orange"}
+             ]
     end
 
     @tag tetro_name: :o
     test "when given a valid :o tetro, covert to group", ctx do
-      assert Tetromino.to_group(ctx.tetro) == [{2, 3}, {2, 4}, {3, 3}, {3, 4}]
+      assert Tetromino.to_group(ctx.tetro) == [
+               {{2, 3}, "purple"},
+               {{2, 4}, "purple"},
+               {{3, 3}, "purple"},
+               {{3, 4}, "purple"}
+             ]
     end
 
     @tag tetro_name: :s
     test "when given a valid :s tetro, covert to group", ctx do
-      assert Tetromino.to_group(ctx.tetro) == [{3, 4}, {3, 5}, {4, 3}, {4, 4}]
+      assert Tetromino.to_group(ctx.tetro) == [
+               {{3, 4}, "yellow"},
+               {{3, 5}, "yellow"},
+               {{4, 3}, "yellow"},
+               {{4, 4}, "yellow"}
+             ]
     end
 
     @tag tetro_name: :t
     test "when given a valid :t tetro, covert to group", ctx do
-      assert Tetromino.to_group(ctx.tetro) == [{2, 3}, {3, 3}, {4, 3}, {3, 4}]
+      assert Tetromino.to_group(ctx.tetro) == [
+               {{2, 3}, "green"},
+               {{3, 3}, "green"},
+               {{4, 3}, "green"},
+               {{3, 4}, "green"}
+             ]
     end
 
     @tag tetro_name: :z
     test "when given a valid :z tetro, covert to group", ctx do
-      assert Tetromino.to_group(ctx.tetro) == [{3, 3}, {3, 4}, {4, 4}, {4, 5}]
+      assert Tetromino.to_group(ctx.tetro) == [
+               {{3, 3}, "red"},
+               {{3, 4}, "red"},
+               {{4, 4}, "red"},
+               {{4, 5}, "red"}
+             ]
     end
 
     test "when given a valid tetro rotated, covert to group", ctx do
       assert ctx.tetro
              |> Tetromino.rotate()
-             |> Tetromino.to_group() == [{3, 5}, {3, 4}, {3, 3}, {3, 2}]
+             |> Tetromino.to_group() == [
+               {{3, 5}, "blue"},
+               {{3, 4}, "blue"},
+               {{3, 3}, "blue"},
+               {{3, 2}, "blue"}
+             ]
     end
 
     test "when given a valid tetro moved, covert to group", ctx do
@@ -143,7 +185,12 @@ defmodule TetrominoTest do
              |> Tetromino.fall()
              |> Tetromino.left()
              |> Tetromino.right()
-             |> Tetromino.to_group() == [{3, 3}, {4, 3}, {5, 3}, {6, 3}]
+             |> Tetromino.to_group() == [
+               {{3, 3}, "blue"},
+               {{4, 3}, "blue"},
+               {{5, 3}, "blue"},
+               {{6, 3}, "blue"}
+             ]
     end
   end
 end

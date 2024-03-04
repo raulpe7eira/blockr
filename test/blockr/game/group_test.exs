@@ -1,5 +1,7 @@
-defmodule GroupTest do
+defmodule Blockr.Game.GroupTest do
   use ExUnit.Case
+
+  alias Blockr.Game.Group
 
   setup do
     %{points: [{2, 2}, {3, 2}, {4, 2}, {4, 3}]}
@@ -44,6 +46,17 @@ defmodule GroupTest do
 
     test "when given a valid points and 270 degrees, rotate the points", ctx do
       assert Group.rotate(ctx.points, 270) == [{3, 2}, {3, 3}, {3, 4}, {2, 4}]
+    end
+  end
+
+  describe "paint/2" do
+    test "when given a valid points and shape_name, return points w/ color", ctx do
+      assert Group.paint(ctx.points, :i) == [
+               {{2, 2}, "blue"},
+               {{3, 2}, "blue"},
+               {{4, 2}, "blue"},
+               {{4, 3}, "blue"}
+             ]
     end
   end
 end
