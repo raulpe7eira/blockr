@@ -6,71 +6,82 @@ defmodule Blockr.Game.BoardTest do
   alias Blockr.Game.Board
 
   @walls [
-    {0, 0},
-    {0, 1},
-    {0, 2},
-    {0, 3},
-    {0, 4},
-    {0, 5},
-    {0, 6},
-    {0, 7},
-    {0, 8},
-    {0, 9},
-    {0, 10},
-    {0, 11},
-    {1, 0},
-    {1, 11},
-    {2, 0},
-    {2, 11},
-    {3, 0},
-    {3, 11},
-    {4, 0},
-    {4, 11},
-    {5, 0},
-    {5, 11},
-    {6, 0},
-    {6, 11},
-    {7, 0},
-    {7, 11},
-    {8, 0},
-    {8, 11},
-    {9, 0},
-    {9, 11},
-    {10, 0},
-    {10, 11},
-    {11, 0},
-    {11, 11},
-    {12, 0},
-    {12, 11},
-    {13, 0},
-    {13, 11},
-    {14, 0},
-    {14, 11},
-    {15, 0},
-    {15, 11},
-    {16, 0},
-    {16, 11},
-    {17, 0},
-    {17, 11},
-    {18, 0},
-    {18, 11},
-    {19, 0},
-    {19, 11},
-    {20, 0},
-    {20, 11},
-    {21, 0},
-    {21, 1},
-    {21, 2},
-    {21, 3},
-    {21, 4},
-    {21, 5},
-    {21, 6},
-    {21, 7},
-    {21, 8},
-    {21, 9},
-    {21, 10},
-    {21, 11}
+    {{0, 0}, "black"},
+    {{0, 1}, "black"},
+    {{0, 2}, "black"},
+    {{0, 3}, "black"},
+    {{0, 4}, "black"},
+    {{0, 5}, "black"},
+    {{0, 6}, "black"},
+    {{0, 7}, "black"},
+    {{0, 8}, "black"},
+    {{0, 9}, "black"},
+    {{0, 10}, "black"},
+    {{0, 11}, "black"},
+    {{1, 0}, "black"},
+    {{1, 11}, "black"},
+    {{2, 0}, "black"},
+    {{2, 11}, "black"},
+    {{3, 0}, "black"},
+    {{3, 11}, "black"},
+    {{4, 0}, "black"},
+    {{4, 11}, "black"},
+    {{5, 0}, "black"},
+    {{5, 11}, "black"},
+    {{6, 0}, "black"},
+    {{6, 11}, "black"},
+    {{7, 0}, "black"},
+    {{7, 11}, "black"},
+    {{8, 0}, "black"},
+    {{8, 11}, "black"},
+    {{9, 0}, "black"},
+    {{9, 11}, "black"},
+    {{10, 0}, "black"},
+    {{10, 11}, "black"},
+    {{11, 0}, "black"},
+    {{11, 11}, "black"},
+    {{12, 0}, "black"},
+    {{12, 11}, "black"},
+    {{13, 0}, "black"},
+    {{13, 11}, "black"},
+    {{14, 0}, "black"},
+    {{14, 11}, "black"},
+    {{15, 0}, "black"},
+    {{15, 11}, "black"},
+    {{16, 0}, "black"},
+    {{16, 11}, "black"},
+    {{17, 0}, "black"},
+    {{17, 11}, "black"},
+    {{18, 0}, "black"},
+    {{18, 11}, "black"},
+    {{19, 0}, "black"},
+    {{19, 11}, "black"},
+    {{20, 0}, "black"},
+    {{20, 11}, "black"},
+    {{21, 0}, "black"},
+    {{21, 1}, "black"},
+    {{21, 2}, "black"},
+    {{21, 3}, "black"},
+    {{21, 4}, "black"},
+    {{21, 5}, "black"},
+    {{21, 6}, "black"},
+    {{21, 7}, "black"},
+    {{21, 8}, "black"},
+    {{21, 9}, "black"},
+    {{21, 10}, "black"},
+    {{21, 11}, "black"}
   ]
+
+  setup do
+    %{
+      board: %Board{
+        score: 0,
+        tetro: %Tetromino{name: :i, location: {0, 3}, rotation: 0, color: "blue"},
+        walls: @walls,
+        junkyard: []
+      }
+    }
+  end
 
   describe "new/0" do
     test "when call new, create a new board" do
@@ -107,6 +118,21 @@ defmodule Blockr.Game.BoardTest do
 
       assert name_shape in [:i, :l, :j, :o, :s, :t, :z]
       assert color_shape == Color.for(name_shape)
+    end
+  end
+
+  describe "show/1" do
+    test "when given a valid board, convert to groups", ctx do
+      assert Board.show(ctx.board) == [
+               [
+                 {{1, 5}, "blue"},
+                 {{2, 5}, "blue"},
+                 {{3, 5}, "blue"},
+                 {{4, 5}, "blue"}
+               ],
+               @walls,
+               ctx.board.junkyard
+             ]
     end
   end
 end

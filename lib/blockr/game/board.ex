@@ -21,9 +21,13 @@ defmodule Blockr.Game.Board do
   defp add_walls(board) do
     walls =
       for row <- 0..21, col <- 0..11, row in [0, 21] or col in [0, 11] do
-        {row, col}
+        {{row, col}, "black"}
       end
 
     %{board | walls: walls}
+  end
+
+  def show(board) do
+    [Tetromino.to_group(board.tetro), board.walls, board.junkyard]
   end
 end

@@ -1,6 +1,8 @@
 # Blockr
 
 ```elixir
+alias Blockr.Game
+alias Blockr.Game.Board
 alias Blockr.Game.Canvas
 alias Blockr.Game.Point
 alias Blockr.Game.Tetromino
@@ -302,5 +304,58 @@ Next in our implementation:
 for row <- 0..21, col <- 0..11, row in [0, 21] or col in [0, 11] do
   {row, col}
 end
+|> Canvas.new()
+```
+
+### Show
+
+```elixir
+Board.new()
+|> Board.show()
+|> Canvas.new()
+```
+
+### Left
+
+```elixir
+Board.new()
+|> Game.left()
+|> Game.left()
+|> Game.left()
+|> Game.left()
+|> Game.left()
+|> Game.left()
+|> Board.show()
+|> Canvas.new()
+```
+
+### Right
+
+```elixir
+Board.new()
+|> Game.right()
+|> Game.right()
+|> Game.right()
+|> Game.right()
+|> Game.right()
+|> Game.right()
+|> Board.show()
+|> Canvas.new()
+```
+
+### Turn
+
+```elixir
+Board.new()
+|> Game.turn()
+|> Game.right()
+|> Game.right()
+|> Game.right()
+|> Game.right()
+|> Game.right()
+|> Game.right()
+|> Game.right()
+|> Game.turn()
+|> Board.show()
 |> Canvas.new()
 ```
