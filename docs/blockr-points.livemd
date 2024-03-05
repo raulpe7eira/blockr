@@ -355,7 +355,17 @@ Board.new()
 |> Game.right()
 |> Game.right()
 |> Game.right()
+|> Game.right()
 |> Game.turn()
+|> Board.show()
+|> Canvas.new()
+```
+
+### Fall
+
+```elixir
+1..20
+|> Enum.reduce(Board.new(), fn _, board -> Game.fall(board) end)
 |> Board.show()
 |> Canvas.new()
 ```

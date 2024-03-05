@@ -121,6 +121,46 @@ defmodule Blockr.Game.BoardTest do
     end
   end
 
+  describe "detach/1" do
+    test "when given a valid board, detach a crashed tetro", ctx do
+      assert Board.detach(ctx.board) == %Board{
+               score: 0,
+               tetro: %Tetromino{
+                 name: :i,
+                 location: {0, 3},
+                 rotation: 0,
+                 color: "blue"
+               },
+               walls: @walls,
+               junkyard: [
+                 {{1, 5}, "blue"},
+                 {{2, 5}, "blue"},
+                 {{3, 5}, "blue"},
+                 {{4, 5}, "blue"}
+               ]
+             }
+    end
+  end
+
+  describe "put_new_tetro/1" do
+    test "when given a valid board, put a new tetro", ctx do
+      assert %Board{
+               score: 0,
+               tetro: %Tetromino{
+                 name: name_shape,
+                 location: {0, 3},
+                 rotation: 0,
+                 color: color_shape
+               },
+               walls: @walls,
+               junkyard: []
+             } = Board.put_new_tetro(ctx.board)
+
+      assert name_shape in [:i, :l, :j, :o, :s, :t, :z]
+      assert color_shape == Color.for(name_shape)
+    end
+  end
+
   describe "show/1" do
     test "when given a valid board, convert to groups", ctx do
       assert Board.show(ctx.board) == [
