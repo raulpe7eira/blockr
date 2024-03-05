@@ -3,7 +3,7 @@ defmodule Blockr.Game.Canvas do
 
   def new(contents) do
     """
-    <svg width="100" height="200" xmlns="http://www.w3.org/2000/svg">
+    <svg width="120" height="220" xmlns="http://www.w3.org/2000/svg">
       #{draw(contents, 10)}
     </svg>
     """
@@ -19,18 +19,18 @@ defmodule Blockr.Game.Canvas do
     |> Kino.Image.new(:svg)
   end
 
-  def draw({{row, col}, color}, width) when is_binary(color) do
-    x = (col - 1) * width
-    y = (row - 1) * width
+  defp draw({{row, col}, color}, width) when is_binary(color) do
+    x = (col - 1) * width + 10
+    y = (row - 1) * width + 10
 
     ~s'<rect x="#{x}" y="#{y}" width="#{width}" height="#{width}" fill="#{color}" />'
   end
 
-  def draw({_, _} = point, width) do
+  defp draw({_, _} = point, width) do
     draw({point, @without_color}, width)
   end
 
-  def draw(points, width) when is_list(points) do
+  defp draw(points, width) when is_list(points) do
     points
     |> Enum.map(&draw(&1, width))
     |> Enum.join("\n")

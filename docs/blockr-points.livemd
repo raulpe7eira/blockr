@@ -219,7 +219,7 @@ points
 ### :i shape
 
 ```elixir
-:i
+[name: :i]
 |> Tetromino.new()
 |> Tetromino.to_group()
 |> Canvas.tetromino()
@@ -228,7 +228,7 @@ points
 ### :l shape
 
 ```elixir
-:l
+[name: :l]
 |> Tetromino.new()
 |> Tetromino.to_group()
 |> Canvas.tetromino()
@@ -237,7 +237,7 @@ points
 ### :j shape
 
 ```elixir
-:j
+[name: :j]
 |> Tetromino.new()
 |> Tetromino.to_group()
 |> Canvas.tetromino()
@@ -246,7 +246,7 @@ points
 ### :o shape
 
 ```elixir
-:o
+[name: :o]
 |> Tetromino.new()
 |> Tetromino.to_group()
 |> Canvas.tetromino()
@@ -255,7 +255,7 @@ points
 ### :s shape
 
 ```elixir
-:s
+[name: :s]
 |> Tetromino.new()
 |> Tetromino.to_group()
 |> Canvas.tetromino()
@@ -264,7 +264,7 @@ points
 ### :t shape
 
 ```elixir
-:t
+[name: :t]
 |> Tetromino.new()
 |> Tetromino.to_group()
 |> Canvas.tetromino()
@@ -273,7 +273,7 @@ points
 ### :z shape
 
 ```elixir
-:z
+[name: :z]
 |> Tetromino.new()
 |> Tetromino.to_group()
 |> Canvas.tetromino()
@@ -293,3 +293,14 @@ Next in our implementation:
 * Detatch `Tetromino` if `fall` fails
 * Score `Tetromino` if `fall` fails
 * Remove scored rows on `score`
+
+<!-- livebook:{"break_markdown":true} -->
+
+### Board
+
+```elixir
+for row <- 0..21, col <- 0..11, row in [0, 21] or col in [0, 11] do
+  {row, col}
+end
+|> Canvas.new()
+```

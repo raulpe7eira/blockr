@@ -5,8 +5,10 @@ defmodule Blockr.Game.Tetromino do
 
   defstruct name: :i, location: {0, 0}, rotation: 0, color: Color.for(:i)
 
-  def new(name \\ :i) do
-    %__MODULE__{name: name, color: Color.for(name)}
+  def new(opts \\ []) when is_list(opts) do
+    name = Keyword.get(opts, :name, :i)
+
+    __struct__(opts ++ [name: name, color: Color.for(name)])
   end
 
   def fall(tetro) do

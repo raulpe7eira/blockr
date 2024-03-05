@@ -21,8 +21,8 @@ defmodule Blockr.Game.TetrominoTest do
   end
 
   describe "new/1" do
-    test "when given a valid name, create a new tetromino" do
-      assert Tetromino.new(:z) == %Tetromino{
+    test "when given a valid opts, create a new tetromino" do
+      assert Tetromino.new(name: :z) == %Tetromino{
                name: :z,
                location: {0, 0},
                rotation: 0,
