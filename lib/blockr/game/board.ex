@@ -24,6 +24,17 @@ defmodule Blockr.Game.Board do
     %{board | walls: walls}
   end
 
+  def count_completed_rows(board) do
+    extract_point =
+      fn {point, _color} -> point end
+
+    board.junkyard
+    |> Enum.map(extract_point)
+    |> Enum.group_by(fn {r, _} -> r end)
+    |> Map.values()
+    |> Enum.count(fn list -> length(list) == 10 end)
+  end
+
   def detach(board) do
     %{board | junkyard: board.junkyard ++ Tetromino.to_group(board.tetro)}
   end

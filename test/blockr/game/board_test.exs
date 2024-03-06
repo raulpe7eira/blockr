@@ -121,6 +121,14 @@ defmodule Blockr.Game.BoardTest do
     end
   end
 
+  describe "count_completed_rows/1" do
+    test "when given a valid board, count the completed rows", ctx do
+      junkyard = for r <- 17..20, c <- 1..10, do: {{r, c}, "purple"}
+
+      assert Board.count_completed_rows(%{ctx.board | junkyard: junkyard}) == 4
+    end
+  end
+
   describe "detach/1" do
     test "when given a valid board, detach a crashed tetro", ctx do
       assert Board.detach(ctx.board) == %Board{

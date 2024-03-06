@@ -369,3 +369,21 @@ Board.new()
 |> Board.show()
 |> Canvas.new()
 ```
+
+### Count completed rows
+
+```elixir
+board = Board.new()
+
+junkyard = for r <- 17..20, c <- 1..10, do: {{r, c}, "green"}
+
+board = %{board | junkyard: junkyard}
+
+board
+|> Board.show()
+|> Canvas.new()
+```
+
+```elixir
+Board.count_completed_rows(board)
+```
