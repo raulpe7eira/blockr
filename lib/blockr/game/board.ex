@@ -24,19 +24,8 @@ defmodule Blockr.Game.Board do
     %{board | walls: walls}
   end
 
-  def count_completed_rows(board) do
-    extract_point =
-      fn {point, _color} -> point end
-
-    board.junkyard
-    |> Enum.map(extract_point)
-    |> Enum.group_by(fn {r, _} -> r end)
-    |> Map.values()
-    |> Enum.count(fn list -> length(list) == 10 end)
-  end
-
   def detach(board) do
-    %{board | junkyard: board.junkyard ++ Tetromino.to_group(board.tetro)}
+    add_score(%{board | junkyard: board.junkyard ++ Tetromino.to_group(board.tetro)})
   end
 
   def put_new_tetro(board) do
@@ -49,5 +38,28 @@ defmodule Blockr.Game.Board do
 
   def show(board) do
     [Tetromino.to_group(board.tetro), board.walls, board.junkyard]
+  end
+
+  defp add_score(board) do
+    number_of_rows = count_completed_rows(board)
+
+    score =
+      cond do
+        number_of_rows == 0 -> 0
+        true -> :math.pow(2, number_of_rows) |> round() |> Kernel.*(50)
+      end
+
+    %{board | score: score}
+  end
+
+  defp count_completed_rows(board) do
+    extract_point =
+      fn {point, _color} -> point end
+
+    board.junkyard
+    |> Enum.map(extract_point)
+    |> Enum.group_by(fn {r, _} -> r end)
+    |> Map.values()
+    |> Enum.count(fn list -> length(list) == 10 end)
   end
 end

@@ -383,7 +383,3 @@ board
 |> Board.show()
 |> Canvas.new()
 ```
-
-```elixir
-Board.count_completed_rows(board)
-```
