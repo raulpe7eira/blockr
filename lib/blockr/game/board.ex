@@ -1,4 +1,5 @@
 defmodule Blockr.Game.Board do
+  alias Blockr.Game.Point
   alias Blockr.Game.Tetromino
 
   defstruct score: 0, tetro: nil, walls: [], junkyard: []
@@ -25,19 +26,9 @@ defmodule Blockr.Game.Board do
   end
 
   def detach(board) do
-    add_score(%{board | junkyard: board.junkyard ++ Tetromino.to_group(board.tetro)})
-  end
-
-  def put_new_tetro(board) do
-    random_name =
-      [:i, :l, :j, :o, :s, :t, :z]
-      |> Enum.random()
-
-    %{board | tetro: Tetromino.new(name: random_name, location: {0, 3})}
-  end
-
-  def show(board) do
-    [Tetromino.to_group(board.tetro), board.walls, board.junkyard]
+    %{board | junkyard: board.junkyard ++ Tetromino.to_group(board.tetro)}
+    |> add_score()
+    |> eat_completed_rows()
   end
 
   defp add_score(board) do
@@ -61,5 +52,48 @@ defmodule Blockr.Game.Board do
     |> Enum.group_by(fn {r, _} -> r end)
     |> Map.values()
     |> Enum.count(fn list -> length(list) == 10 end)
+  end
+
+  def eat_completed_rows(board) do
+    rows = Enum.group_by(board.junkyard, fn {{row, _col}, _color} -> row end)
+
+    completed =
+      rows
+      |> Enum.filter(fn {_row, list} -> length(list) == 10 end)
+      |> Map.new()
+      |> Map.keys()
+
+    junkyard =
+      Enum.reduce(completed, rows, &eat_row/2)
+      |> Map.values()
+      |> List.flatten()
+
+    %{board | junkyard: junkyard}
+  end
+
+  defp eat_row(row_number, rows) do
+    rows
+    |> Map.delete(row_number)
+    |> Enum.map(fn
+      {row, list} when row_number > row -> {row + 1, move_all_down(list)}
+      row_with_list -> row_with_list
+    end)
+    |> Map.new()
+  end
+
+  defp move_all_down(points) do
+    Enum.map(points, fn {point, color} -> {Point.move_down(point), color} end)
+  end
+
+  def put_new_tetro(board) do
+    random_name =
+      [:i, :l, :j, :o, :s, :t, :z]
+      |> Enum.random()
+
+    %{board | tetro: Tetromino.new(name: random_name, location: {0, 3})}
+  end
+
+  def show(board) do
+    [Tetromino.to_group(board.tetro), board.walls, board.junkyard]
   end
 end

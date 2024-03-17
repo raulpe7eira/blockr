@@ -141,7 +141,7 @@ defmodule Blockr.Game.BoardTest do
              }
     end
 
-    test "when given a valid board w\ junkyard, detach a crashed tetro and add score", ctx do
+    test "when given a valid board w\ junkyard, detach a crashed tetro in new board", ctx do
       junkyard = for r <- 17..20, c <- 1..10, do: {{r, c}, "purple"}
 
       assert Board.detach(%{ctx.board | junkyard: junkyard}) == %Board{
@@ -153,14 +153,12 @@ defmodule Blockr.Game.BoardTest do
                  color: "blue"
                },
                walls: @walls,
-               junkyard:
-                 junkyard ++
-                   [
-                     {{1, 5}, "blue"},
-                     {{2, 5}, "blue"},
-                     {{3, 5}, "blue"},
-                     {{4, 5}, "blue"}
-                   ]
+               junkyard: [
+                 {{5, 5}, "blue"},
+                 {{6, 5}, "blue"},
+                 {{7, 5}, "blue"},
+                 {{8, 5}, "blue"}
+               ]
              }
     end
   end

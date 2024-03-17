@@ -370,7 +370,7 @@ Board.new()
 |> Canvas.new()
 ```
 
-### Count completed rows
+### Completed rows
 
 ```elixir
 board = Board.new()
@@ -378,6 +378,18 @@ board = Board.new()
 junkyard = for r <- 17..20, c <- 1..10, do: {{r, c}, "green"}
 
 board = %{board | junkyard: junkyard}
+
+board
+|> Board.show()
+|> Canvas.new()
+```
+
+### Ate rows
+
+```elixir
+exclude = [{{17, 5}, "green"}, {{18, 5}, "green"}, {{20, 5}, "green"}]
+
+board = %{board | junkyard: board.junkyard -- exclude}
 
 board
 |> Board.show()
